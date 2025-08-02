@@ -4,11 +4,11 @@ import grails.gorm.transactions.Transactional
 import test.with.postgres.utils.CustomError
 import test.with.postgres.utils.LoginResponse
 import test.with.postgres.utils.PasswordUtil
-import test.with.postgres.utils.JwtUtil
 
 @Transactional
 class AuthService {
 
+    JwtService jwtService
     LoginResponse login(String workerId, String password) {
         def foundUser = User.findByWorkerId(workerId);
         if (foundUser == null) {
@@ -19,7 +19,11 @@ class AuthService {
             return new LoginResponse(new CustomError("Login", "login.invalidCredentials"))
         }
 
-        def token = JwtUtil.generateToken(foundUser.id.toString())
+        def token = jwtService.generateToken([
+                id: foundUser.id.toString(),
+                role: foundUser.role,
+                branchId: foundUser.branchId
+        ])
 
         return new LoginResponse([
                 token: token,

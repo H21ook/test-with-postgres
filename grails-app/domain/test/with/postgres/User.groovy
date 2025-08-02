@@ -10,6 +10,7 @@ class User implements JsonSerializable {
     String rank
     String password
     String role
+    Long branchId
     Date dateCreated
     Date lastUpdated
 
@@ -21,17 +22,19 @@ class User implements JsonSerializable {
         rank nullable: true
         password blank: false, nullable: false
         role nullable: true
+        branchId brank: false
     }
 
     static mapping = {
         table 'user_table'
-        password column: 'user_password' // PostgreSQL зарим үед "password" зарлагдсан keyword байж болдог тул
+        password column: 'user_password'
     }
 
     Map toMap() {
         return [
             id        : id,
             workerId  : workerId,
+            branchId  : branchId,
             surname   : surname,
             givenname : givenname,
             position  : position,

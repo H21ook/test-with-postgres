@@ -9,6 +9,10 @@ class UrlMappings {
             }
         }
         "/auth/login"(controller: 'auth', action: 'login', method: 'POST')
+
+        "/branches"(controller: 'branch', action: 'save', method: 'POST')
+        "/branches/getBranchesByParentId/$id"(controller: 'branch', action: 'getBranchesByParentId', method: 'GET')
+
         "/users"(controller: 'user', action: 'index', method: 'GET')
         "/users"(controller: 'user', action: 'save', method: 'POST')
 

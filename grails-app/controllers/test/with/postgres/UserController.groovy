@@ -22,7 +22,6 @@ class UserController {
             return
         }
         render status: 200, contentType: 'application/json', text: user.toJson()
-        return
     }
 
     def save() {
@@ -34,7 +33,6 @@ class UserController {
         }
 
         render status: 201, contentType: 'application/json', text: user.toJson()
-        return
     }
 
     def delete(Long id) {
@@ -45,7 +43,6 @@ class UserController {
         }
 
         render status: 404
-        return
     }
 
 }
